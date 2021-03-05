@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Issues</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css" rel="stylesheet">
+  </head>
+  <body>
+    {% for issue in issues %}
+    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+      <a href="https://www.github.com/{{issue.repository.full_name}}/issues/{{issue.number}}">{{issue.repository.full_name}}/{{issue.number}} {{issue.state}}
+      </a>
+    </div>
+    <br>
+    {% endfor %}
+    {% for notification in notifications %}
+      <a href="https://www.github.com/{{notification.repository.full_name}}/pull/{{notification.subject.url | split(pat="/") | last}}">
+    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+      PR Title: {{notification.subject.title}}<br>
+      Repo: {{notification.repository.full_name}}<br>
+      Reason: {{ notification.reason }}<br>
+    </div>
+    </a>
+    <br>
+    {% endfor %}
+  </body>
+</html>
